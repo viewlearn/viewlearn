@@ -253,26 +253,40 @@ echo('</div>
    Registration instructions goes here 
    Registration instructions goes here 
    <hr/>');
+   
+   
+/**
+ * user initiates a learning session.
+ */
 $id=$_SESSION['ID'];
-$db=new db;
-$get_session=$db->get("SELECT ID FROM session WHERE userID='$id' AND status='started' LIMIT 1");
-$num=number_rows($get_session);
-if($num==1){
-echo('<form method="post"><input class="btn btn-danger" name="cancel" type="submit" class="btn btn-success "value="TERMINATE SESSION"></form>');
-$config=new config;
-$config->session_terminate();
+$sessionID=$_GET['ref_content'];
 
-    
+/**
+ * check if user has established a learning session.
+ */
+$db=new db;
+$get=$db->get("SELECT ID FROM session WHERE userID='$id' AND name='$sessionID' LIMIT 1");   
+$num=number_rows($get);
+if($num==1){
+$my_session='true';
+/**
+ * terminte session.
+ */
+echo('<form method="post"><input class="btn btn-danger" name="cancel" type="submit" class="btn btn-success "value="TERMINATE SESSION"></form>');
+
 }elseif($num==0){
+$my_session=false;
+/**
+ * create session.
+ */
 echo('<form method="post">
 <input class="btn btn-primary" name="start" type="submit" value="START COUNTING SESSION">
-</form>');    
+</form>');
 if(isset($_POST['start'])){
 $config=new config;
-$config->session_establish();    
+$config->session_establish();  
 }
-}   
-
+}
     
     
     
@@ -280,12 +294,56 @@ echo('</p>
 </div>
 
   <div class="" style="display: inline-table;width:50%;padding:10px;padding-right:10%;padding-left:30px;min-width:300px;text-align:center;">
-    <p style="padding:10px;width:40%;">
-  
+    <p style="padding:10px;width:50%;">
   
 </p>');
+if($my_session==true){
+echo('<div class="alert alert-success">
+  <strong>SESSION ESTABLISHED!</strong> You have stablished a learning session please continue.
+</div><hr/>');
 
-echo $_POST['start'];
+echo('<div class="panel panel-default"><div class="panel-body">');
+  
+echo('</div></div>');
+
+
+
+
+    
+}elseif($my_session==false){
+echo('<div class="alert alert-warning">
+  <strong>ESTABLISH A SESSION! </strong> You can now start a learning session.
+</div><hr/>');
+
+
+echo('<div class="panel panel-default">
+  <div class="panel-body">');
+  
+echo('</div></div>');
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 echo('</div>

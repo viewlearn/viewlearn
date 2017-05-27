@@ -106,17 +106,12 @@ error('user cannot be found');
 function session_establish(){
 $id=$_SESSION['ID'];
 if($id!=""){
-    
 $sessionID=$_GET['ref_content'];
 $db=new db;
-$get=$db->get("SELECT ID FROM session WHERE name='$sessionID'");
-$num=number_rows($get);
-if($num==1)
 return $post=$db->post("INSERT INTO session(userID,name,status)VALUES('$id','$sessionID','started')");    
 
-}
 }    
-    
+}    
     
     
 /**
@@ -132,8 +127,23 @@ return $post=$db->post("UPDATE session SET status='completed' WHERE userID='$id'
 }    
         
     
-    
-    
+/**
+     * function retrieves questions on session start 
+     */    
+function get_questions($subject){
+$sessionID=$_GET['ref_content'];
+$db=new db;
+$get=$db->get("SELECT * FROM questions WHERE subjectID='$sessionID'");
+echo $num=number_rows($get);
+if($num>0){
+while($row=record($get)){
+echo('<a href=""><img src=""></a>');   
+}     
+end_get_records($get);    
+}else{
+error('No content');
+}    
+}     
     
     
     
