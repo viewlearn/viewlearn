@@ -6,7 +6,9 @@
  */
 
 class page{
-
+/**
+ * page error function.
+ */
 static function page_error($content){
 if($content==false){
 return('
@@ -21,7 +23,9 @@ return('
     
     
     
-    
+/**
+     * function for displaying home page interface.
+     */    
 function  home_interface(){
 echo('<div class="body" style="min-height: 500px;">');
 
@@ -71,7 +75,9 @@ echo('<div class="container-fluid bg-3 text-center">
 
     
     
-    
+/**
+     * function for the login interface.
+     */    
 function login_interface(){
 echo('<div class="w3-cell-row" style="min-height:500px;">
 
@@ -140,7 +146,9 @@ echo('</div>
 
 
 
-
+/**
+ * function for the sign up interface.
+ */
 function signup_interface(){
 echo('<div class="w3-cell-row" style="min-height:500px;">
 
@@ -226,7 +234,9 @@ echo('</div>
   
   
   
-  
+ /**
+   * function for the count dashboard.
+   */ 
  function count_dashboard(){
  
  echo('<div class="w3-cell-row" style="min-height:500px;">

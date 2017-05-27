@@ -63,7 +63,7 @@ error("fill in the data for the query");
 
 
 /**
-*get data from the database 
+*function to get record from the database 
 */  
 
   
@@ -118,7 +118,7 @@ return mysql_query($query);
 
 
 /**
- * return number of rows.
+ * function to return number of rows.
  */
 function number_rows($num){
 if($num!=''){
@@ -164,7 +164,7 @@ error('returned empty records');
 
 
 /**
- * free resource at the end of the query.
+ * function to free resource at the end of the query.
  */
 function end_get_records($get){
 if($get!=''){

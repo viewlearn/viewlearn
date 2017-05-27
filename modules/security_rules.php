@@ -14,7 +14,7 @@ return strip_tags($var);
 
 
 /**
- * Validates email address.
+ * function for validates email address.
  */
 function email_validation($email){
 if($email!=''){    

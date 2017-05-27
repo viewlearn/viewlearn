@@ -1,5 +1,11 @@
 <?php
+/**
+ * Session start for the system.
+ */
 session_start();
+/**
+ * Inluding the main configuration page.
+ */
 include_once('modules/config.php');	
 ?>
 <!DOCTYPE html>
@@ -133,6 +139,12 @@ border:solid 5px white;
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <?php
+/**
+       * menu changes on login and out.
+       */      
+      
+      
+      
 	if($_SESSION['ID']!=""){
 $config=new config;
 $user=$config->return_user();	   
@@ -165,6 +177,9 @@ $user=$config->return_user();
 
 
 <?php
+/**
+ * Dynamic page call.
+ */
 config::page();	
 ?>
 

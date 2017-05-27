@@ -10,6 +10,10 @@ include_once('functions.php');
 date_default_timezone_set('Africa/Kampala');
 class config{
 
+
+/**
+ * function that switches the menu content.
+ */
 static function page(){
 $menu=$_GET['ref_content'];
 if($menu!=""){
@@ -59,7 +63,9 @@ $page=new page;
 $page->home_interface();
 }
 }    
-    
+/**
+     * function checks if the user is registered or not
+     */    
 function reg_check($session){
 if($session!=""){
 $db=new db;
@@ -75,7 +81,9 @@ return $status;
 }    
     
     
-    
+/**
+     * Function returns user details
+     */    
 function return_user(){
 $session=$_SESSION['ID'];
 if($session!=""){
@@ -92,19 +100,28 @@ error('user cannot be found');
 }    
     
     
-    
+/**
+     * Establishing the learning session 
+     */    
 function session_establish(){
 $id=$_SESSION['ID'];
 if($id!=""){
+    
 $sessionID=$_GET['ref_content'];
 $db=new db;
+$get=$db->get("SELECT ID FROM session WHERE name='$sessionID'");
+$num=number_rows($get);
+if($num==1)
 return $post=$db->post("INSERT INTO session(userID,name,status)VALUES('$id','$sessionID','started')");    
+
 }
 }    
     
     
     
-    
+/**
+     * function that terminates the learning session 
+     */    
 function session_terminate(){
 $id=$_SESSION['ID'];
 if($id!=""){
