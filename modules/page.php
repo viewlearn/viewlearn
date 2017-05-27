@@ -307,6 +307,10 @@ $config->get_questions();
 echo('</div></div>');
 
 
+$config->qn_button();
+
+
+
 
 
     

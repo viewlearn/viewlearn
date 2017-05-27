@@ -133,25 +133,132 @@ return $post=$db->post("UPDATE session SET status='completed' WHERE userID='$id'
 function get_questions(){
 $sessionID=$_GET['ref_content'];
 $db=new db;
-$get=$db->get("SELECT * FROM questions WHERE subjectID='$sessionID'");
-echo $num=number_rows($get);
+$get=$db->get("SELECT * FROM question WHERE subjectID='$sessionID'");
+$num=number_rows($get);
 if($num>0){
 while($row=record($get)){
-echo('<a href="#"><img src="'.$row['question_file'].'"></a>');   
+echo('<a href="?ref_content='.$_GET['ref_content'].'&qn_ans='.$row['question'].'"><img src="'.$row['image'].'" style="width:170px;border:solid thin silver;height:180px;margin:3px;"></a>');   
 }     
 end_get_records($get);    
+
+$config=new config;
+$qn=$config->audio_answers($_GET['qn_ans']);
+
+
+
+
 }else{
 error('No content');
 }    
 }     
+
+
+/**
+ * question buttion
+ */
+function qn_button(){
+$config=new config;
+echo $ask=$config->ask_question();
+if($ask==0){
+
+$config->def_qn();
+    
+}elseif($ask>0){
+    
+
+}
+//echo('<form method="POST"><input type="submit" class="btn btn-success" name="ask" value="LISTEN TO QUESTION"/></form>');         
+}
+
+
+
+
+
+
+
+
+function def_qn(){
+$db=new  db;
+$get=$db->get("SELECT qn_file FROM question ORDER BY ID ASC LIMIT 1");
+$num=number_rows($get);
+if($num==1){
+$row=record($get);
+echo('<form method="POST"><input type="submit" class="btn btn-success" name="ask" value="LISTEN TO QUESTION"/>
+<input type="hidden" name="'.$row['qn_file'].'"/></form>'); 
+}   
+}
+
+
+
+
+
+
+    
+/**
+* ASK QUESTION 
+*/    
+function ask_question(){
+$sessionID=$_GET['ref_content'];
+$user=$_SESSION['ID'];
+$db=new db;
+$get=$db->get("SELECT ID FROM excercise WHERE sessionID='$sessionID' AND user='$user' LIMIT 1");    
+return $num=number_rows($get);
+
+}    
     
     
+/**
+     audio function* 
+     */    
+function audio_answers($option){
+if($option!=""){
+$db=new db;
+$get=$db->get("SELECT ans_file,question FROM question WHERE question='$option' LIMIT 1");
+$num=number_rows($get);
+if($num==1){
+$row=record($get);
+end_get_records($get);
+echo('<audio autoplay style="display:none;">
+  <source src="'.$row['ans_file'].'" type="audio/ogg">
+  <source src="'.$row['ans_file'].'" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>');
+return $row['question'];
+}    
+}
+}  
     
-    
-    
-    
-    
-    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
     
     
     
