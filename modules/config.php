@@ -130,14 +130,14 @@ return $post=$db->post("UPDATE session SET status='completed' WHERE userID='$id'
 /**
      * function retrieves questions on session start 
      */    
-function get_questions($subject){
+function get_questions(){
 $sessionID=$_GET['ref_content'];
 $db=new db;
 $get=$db->get("SELECT * FROM questions WHERE subjectID='$sessionID'");
 echo $num=number_rows($get);
 if($num>0){
 while($row=record($get)){
-echo('<a href=""><img src=""></a>');   
+echo('<a href="#"><img src="'.$row['question_file'].'"></a>');   
 }     
 end_get_records($get);    
 }else{

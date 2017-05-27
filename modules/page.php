@@ -301,9 +301,9 @@ if($my_session==true){
 echo('<div class="alert alert-success">
   <strong>SESSION ESTABLISHED!</strong> You have stablished a learning session please continue.
 </div><hr/>');
-
 echo('<div class="panel panel-default"><div class="panel-body">');
-  
+$config=new config;
+$config->get_questions();   
 echo('</div></div>');
 
 
@@ -318,7 +318,7 @@ echo('<div class="alert alert-warning">
 
 echo('<div class="panel panel-default">
   <div class="panel-body">');
-  
+ 
 echo('</div></div>');
 
 
