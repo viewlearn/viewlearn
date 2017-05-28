@@ -6,7 +6,7 @@ session_start();
 /**
  * Inluding the main configuration page.
  */
-include_once('modules/config.php');	
+include_once ('modules/config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,6 +115,16 @@ border-bottom-left-radius: 40px;
 .col-sm-3 img{
 border:solid 5px white;
 }    
+
+#listen{
+background-image: url("icons/speaker.png");
+background-position: center;
+background-size: 14% 90%;
+background-repeat: no-repeat;
+background-position: 20px 3px;
+padding-left: 70px; 
+}
+
     
   </style>
 </head>
@@ -140,22 +150,23 @@ border:solid 5px white;
       <ul class="nav navbar-nav navbar-right">
       <?php
 /**
-       * menu changes on login and out.
-       */      
-      
-      
-      
-	if($_SESSION['ID']!=""){
-$config=new config;
-$user=$config->return_user();	   
-       
-       
- echo('<li><a href="#">('.ucfirst($user['fname']).' '.ucfirst($user['lname']).')</a></li>');      
- echo('<li><a href="?ref_content='.md5('logout_learnview').'"></span> Logout</a></li>');
-	}elseif($_SESSION['ID']==""){
-	echo('<li><a href="?ref_content=register">Register</a></li>
-        <li><a href="?ref_content=login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>');   
-	}
+ * menu changes on login and out.
+ */
+
+
+if ($_SESSION['ID'] != "") {
+    $config = new config;
+    $user = $config->return_user();
+
+
+    echo ('<li><a href="#">(' . ucfirst($user['fname']) . ' ' . ucfirst($user['lname']) .
+        ')</a></li>');
+    echo ('<li><a href="?ref_content=' . md5('logout_learnview') .
+        '"></span> Logout</a></li>');
+} elseif ($_SESSION['ID'] == "") {
+    echo ('<li><a href="?ref_content=register">Register</a></li>
+        <li><a href="?ref_content=login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>');
+}
 ?>
       
       
@@ -180,7 +191,7 @@ $user=$config->return_user();
 /**
  * Dynamic page call.
  */
-config::page();	
+config::page();
 ?>
 
 
@@ -188,7 +199,7 @@ config::page();
 
 
 <footer class="container-fluid text-center" style="background:#27AE60;color:white;">
-  <p>&copy; <?php
+  <p>&copy; <strong>VIEWLEARN </strong><?php
 echo date('Y');
 ?></p>
 </footer>
